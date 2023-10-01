@@ -10,18 +10,29 @@
     <style>
         @keyframes bounceGradient {
             0%, 100% {
-                background-position: 0% 50%;
+                background-position: 0% 40%;
+            }
+            25% {
+                background-position: 100% 60%;
             }
             50% {
-                background-position: 100% 50%;
+                background-position: 30% 50%;
+            }
+            75% {
+                background-position: 70% 40%;
             }
         }
 
         body {
             font-family: 'Manrope', sans-serif;
-            background: linear-gradient(45deg, #FF9800, #E91E63);
+            background: 
+                radial-gradient(circle at 15% 10%, #FFC085, transparent 40%),
+                radial-gradient(circle at 85% 15%, #E8D4F1, transparent 60%),
+                radial-gradient(circle at 70% 60%, #FFC085, transparent 50%),
+                radial-gradient(circle at 20% 80%, #E8D4F1, transparent 70%),
+                radial-gradient(circle at 80% 70%, #FFC085, transparent 70%);
             background-size: 200% 100%;
-            animation: bounceGradient 10s ease-in-out infinite;
+            animation: bounceGradient 5s ease-in-out infinite;
             display: flex;
             justify-content: center;
             align-items: center;
