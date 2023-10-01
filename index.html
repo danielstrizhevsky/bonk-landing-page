@@ -1,5 +1,70 @@
-coming soon
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonk</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.css"/>
 
-<div id="getWaitlistContainer" data-waitlist_id="10954" data-widget_type="WIDGET_2"></div>
-<link rel="stylesheet" type="text/css" href="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.css"/>
-<script src="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.js"></script>
+    <style>
+        @keyframes bounceGradient {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: linear-gradient(45deg, #FF9800, #E91E63);
+            background-size: 200% 100%;
+            animation: bounceGradient 10s ease-in-out infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            position: relative;
+        }
+
+        #comingSoon {
+            font-size: 4em;
+            font-weight: 600;
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #waitlistSection {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #joinWaitlistMessage {
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        #getWaitlistContainer {
+            width: 100%;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="comingSoon">bonk</div>
+
+    <div id="waitlistSection">
+        <div id="joinWaitlistMessage">coming later ⏳ join the waitlist to get updates</div>
+        <div id="getWaitlistContainer" data-waitlist_id="10954" data-widget_type="WIDGET_2"></div>
+    </div>
+
+    <script src="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.js"></script>
+</body>
+</html>
