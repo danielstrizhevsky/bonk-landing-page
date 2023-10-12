@@ -124,10 +124,12 @@
 
     <div id="waitlistSection">
         <div id="joinWaitlistMessage">coming soon ⏳ join the waitlist to get updates</div>
-        <div id="customWaitlist">
-            <input type="email" id="emailInput" placeholder="hello@getbonk.app">
-            <button id="submitButton" onclick="submitToWaitlist()">🚀</button>
-        </div>
+        <form id="waitlistForm" onsubmit="event.preventDefault(); submitToWaitlist();">
+            <div id="customWaitlist">
+                <input type="email" id="emailInput" placeholder="hello@getbonk.app">
+                <button id="submitButton" type="submit">🚀</button>
+            </div>
+        </form>
         <div id="error-message"></div>
     </div>
 
@@ -167,7 +169,7 @@
                 }
                 // Replace the form with a success message
                 const waitlistSection = document.getElementById("waitlistSection");
-                waitlistSection.innerHTML = "<div>Thanks for joining the waitlist! 🎉</div>";
+                waitlistSection.innerHTML = "<div>we'll be in touch soon 🎉</div>";
             })
             .catch(error => {
                 errorMessage.textContent = "Something went wrong. Please try again later.";
