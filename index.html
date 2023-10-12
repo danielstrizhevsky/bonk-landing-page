@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:description" content="Coming later 🚀">
+    <meta property="og:description" content="Coming soon 🚀">
     <meta property="og:image" content="https://getbonk.app/favicons/android-chrome-512x512.png">
     <title>bonk</title>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.css"/>
     <link rel="icon" href="favicons/favicon.ico" type="image/x-icon">
 
     <style>
@@ -68,6 +67,44 @@
             width: 100%;
             max-width: 400px;
         }
+
+        #customWaitlist {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        #emailInput {
+            padding: 8px;
+            font-size: 0.9em;
+            border: 1px solid black;
+            border-right: none;
+            border-radius: 5px 0 0 5px;
+            width: 210px;
+            background-color: transparent;
+            outline: none;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        #submitButton {
+            padding: 8px 40px;
+            font-size: 1em;
+            border: none;
+            background-color: black;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        #submitButton:hover {
+            background-color: #333;
+        }
+
+        #error-message {
+            height: 20px;
+            font-size: 0.8em;
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -75,10 +112,56 @@
     <div id="comingSoon">bonk</div>
 
     <div id="waitlistSection">
-        <div id="joinWaitlistMessage">coming later ⏳ join the waitlist to get updates</div>
-        <div id="getWaitlistContainer" data-waitlist_id="10954" data-widget_type="WIDGET_2"></div>
+        <div id="joinWaitlistMessage">coming soon ⏳ join the waitlist to get updates</div>
+        <div id="customWaitlist">
+            <input type="email" id="emailInput" placeholder="hello@getbonk.app">
+            <button id="submitButton" onclick="submitToWaitlist()">🚀</button>
+        </div>
+        <div id="error-message"></div>
     </div>
 
-    <script src="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.js"></script>
+    <script>
+        function isValidEmail(email) {
+            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            return emailRegex.test(email);
+        }
+        function submitToWaitlist() {
+            const emailInput = document.getElementById("emailInput");
+            const errorMessage = document.getElementById("error-message");
+            const email = emailInput.value;
+
+            if (!emailInput.validity.valid || !isValidEmail(email)) {
+                emailInput.focus();
+                errorMessage.textContent = "Please enter a valid email address.";
+                return;
+            }
+
+            errorMessage.textContent = "";
+            data = {
+                "email": email,
+                "waitlist_id": 10954
+            }
+            fetch("https://api.getwaitlist.com/api/v1/waiter", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    errorMessage.textContent = data.error;
+                    return;
+                }
+                // Replace the form with a success message
+                const waitlistSection = document.getElementById("waitlistSection");
+                waitlistSection.innerHTML = "<div>Thanks for joining the waitlist! 🎉</div>";
+            })
+            .catch(error => {
+                errorMessage.textContent = "Something went wrong. Please try again later.";
+            });
+        }
+    </script>
 </body>
 </html>
